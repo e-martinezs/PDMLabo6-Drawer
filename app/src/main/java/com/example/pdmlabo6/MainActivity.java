@@ -19,6 +19,13 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     public static List<com.example.pdmlabo6.MenuItem> list = new ArrayList<>();
+    private static List<com.example.pdmlabo6.MenuItem> list1 = new ArrayList<>();
+    private static List<com.example.pdmlabo6.MenuItem> list2 = new ArrayList<>();
+    private static List<com.example.pdmlabo6.MenuItem> list3 = new ArrayList<>();
+    private static List<com.example.pdmlabo6.MenuItem> list4 = new ArrayList<>();
+    private static List<com.example.pdmlabo6.MenuItem> list5 = new ArrayList<>();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,20 +45,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 item.setChecked(true);
+                setListFragment(item.getOrder());
                 drawerLayout.closeDrawers();
                 return true;
             }
         });
 
-        list.add(new com.example.pdmlabo6.MenuItem("name1","description1"));
-        list.add(new com.example.pdmlabo6.MenuItem("name2","description2"));
-        list.add(new com.example.pdmlabo6.MenuItem("name3","description3"));
-
-        MenuListFragment fragment = new MenuListFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.contentLayout, fragment);
-        transaction.commit();
+        fillList();
+        setListFragment(0);
     }
 
     @Override
@@ -62,5 +63,50 @@ public class MainActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setListFragment(int id){
+        switch (id){
+            case 0:
+                list = list1;
+                break;
+            case 1:
+                list = list2;
+                break;
+            case 2:
+                list = list3;
+                break;
+            case 3:
+                list = list4;
+                break;
+            case 4:
+                list = list5;
+                break;
+        }
+        MenuListFragment fragment = new MenuListFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.contentLayout, fragment);
+        transaction.commit();
+    }
+
+    private void fillList(){
+        list1.add(new com.example.pdmlabo6.MenuItem("list1 name1","description1"));
+        list1.add(new com.example.pdmlabo6.MenuItem("list1 name3","description3"));
+
+        list2.add(new com.example.pdmlabo6.MenuItem("list2 name1","description1"));
+        list2.add(new com.example.pdmlabo6.MenuItem("list2 name2","description2"));
+        list2.add(new com.example.pdmlabo6.MenuItem("list2 name3","description3"));
+
+        list3.add(new com.example.pdmlabo6.MenuItem("list3 name1","description1"));
+        list3.add(new com.example.pdmlabo6.MenuItem("list3 name2","description2"));
+        list3.add(new com.example.pdmlabo6.MenuItem("list3 name3","description3"));
+        list3.add(new com.example.pdmlabo6.MenuItem("list3 name4","description4"));
+
+        list4.add(new com.example.pdmlabo6.MenuItem("list4 name1","description1"));
+
+        list5.add(new com.example.pdmlabo6.MenuItem("list5 name1","description1"));
+        list5.add(new com.example.pdmlabo6.MenuItem("list5 name2","description2"));
+        list5.add(new com.example.pdmlabo6.MenuItem("list5 name3","description3"));
     }
 }
